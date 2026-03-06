@@ -481,15 +481,11 @@ document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 
 // Form → Make.com webhook
 async function submitForm() {
-  const fname = document.getElementById('fname').value.trim();
-  const phone = document.getElementById('phone').value.trim();
-  if (!fname || !phone) { alert('Please enter your name and phone number so Iris can call you back.'); return; }
-
   const payload = {
-    first_name: fname,
+    first_name: document.getElementById('fname').value.trim(),
     last_name: document.getElementById('lname').value.trim(),
     business: document.getElementById('bizname').value.trim(),
-    phone: phone,
+    phone: document.getElementById('phone').value.trim(),
     email: document.getElementById('email').value.trim(),
     industry: document.getElementById('industry').value,
     message: document.getElementById('message').value.trim(),
@@ -497,12 +493,19 @@ async function submitForm() {
     timestamp: new Date().toISOString()
   };
 
-  // ── STEP: Paste your Make.com webhook URL here after setup ──
-  const WEBHOOK = 'https://hook.us2.make.com/mkzkebh2sun42vciu2jmyboqmijsi3zv';
- if (WEBHOOK !== '') {
-    try { await fetch(WEBHOOK, { method:'POST', mode: 'no-cors', headers:{'Content-Type':'application/json'}, body:JSON.stringify(payload) }); }
-    catch(e) { console.log('Webhook:', e); }
+  if (!payload.first_name || !payload.phone) {
+    alert('Please enter your name and phone number so Iris can call you back.');
+    return;
   }
+
+  const WEBHOOK = 'https://hook.us2.make.com/mkzkebh2sun42vciu2jmyboqmijsi3zv';
+  
+  fetch(WEBHOOK, {
+    method: 'POST',
+    mode: 'no-cors',
+    headers: {'Content-Type': 'application/json'},
+    body: JSON.stringify(payload)
+  });
 
   document.getElementById('formContent').style.display = 'none';
   document.getElementById('formSuccess').style.display = 'block';
