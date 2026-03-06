@@ -500,7 +500,7 @@ async function submitForm() {
   // ── STEP: Paste your Make.com webhook URL here after setup ──
   const WEBHOOK = 'https://hook.us2.make.com/mkzkebh2sun42vciu2jmyboqmijsi3zv';
  if (WEBHOOK !== '') {
-    try { await fetch(WEBHOOK, { method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify(payload) }); }
+    try { await fetch(WEBHOOK, { method:'POST', mode: 'no-cors', headers:{'Content-Type':'application/json'}, body:JSON.stringify(payload) }); }
     catch(e) { console.log('Webhook:', e); }
   }
 
