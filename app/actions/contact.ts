@@ -51,7 +51,7 @@ export async function submitContact(
         <p><strong>Message:</strong></p>
         <p>${escapeHtml(data.message).replace(/\n/g, "<br />")}</p>
       `,
-      replyTo: data.email,
+      reply_to: data.email,
     });
 
     if (emailResult.error) {
