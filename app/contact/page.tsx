@@ -1,5 +1,6 @@
 import { ContactForm } from "@/components/ContactForm";
 
+// Contact page with integrated lead capture via Resend and HubSpot
 export const metadata = {
   title: "Contact Us",
   description: "Get in touch with our team. We'll respond within 24 hours.",
