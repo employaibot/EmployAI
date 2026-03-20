@@ -162,7 +162,7 @@ export function ContactForm() {
       {/* Status Messages */}
       {submitStatus === "success" && (
         <div className="rounded-lg bg-green-50 p-4 text-sm text-green-800">
-          ✓ Thanks for reaching out! We'll be in touch shortly.
+          ✓ Thanks for reaching out! We&apos;ll be in touch shortly.
         </div>
       )}
 
