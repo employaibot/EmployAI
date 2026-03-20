@@ -1,0 +1,32 @@
+{
+  "_note": "Agent configurations live in .claude/agents/ — see code-agent.md and orchestrator.md",
+  "mcpServers": {
+    "github": {
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-github"]
+    },
+    "trello": {
+      "command": "npx",
+      "args": ["-y", "mcp-server-trello"]
+    }
+  },
+  "allowedTools": [
+    "Read",
+    "Write",
+    "Edit",
+    "Bash(npm run lint)",
+    "Bash(npm run build)",
+    "Bash(npm run type-check)",
+    "Bash(npm run dev)",
+    "Bash(git status)",
+    "Bash(git checkout *)",
+    "Bash(git add *)",
+    "Bash(git commit *)",
+    "Bash(git push *)",
+    "Bash(git pull)",
+    "Bash(git log *)",
+    "Bash(gh pr create *)",
+    "Bash(gh pr view *)",
+    "Bash(cd * && git *)"
+  ]
+}

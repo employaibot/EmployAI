@@ -24,12 +24,25 @@ export interface TrelloBoard {
   shortLink: string;
 }
 
+export interface TrelloCheckItem {
+  id: string;
+  name: string;
+  state: "complete" | "incomplete";
+}
+
+export interface TrelloChecklist {
+  id: string;
+  name: string;
+  checkItems: TrelloCheckItem[];
+}
+
 export interface TrelloActionData {
   card?: TrelloCard;
   list?: TrelloList;
   listAfter?: TrelloList;
   listBefore?: TrelloList;
   board?: TrelloBoard;
+  checklist?: TrelloChecklist;
 }
 
 export interface TrelloAction {
