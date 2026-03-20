@@ -76,7 +76,7 @@ export default function HomePage() {
             Ready to grow your business?
           </h2>
           <p className="mt-4 text-lg text-gray-600">
-            Let's talk about how EmployAI can transform your marketing.
+            Let&apos;s talk about how EmployAI can transform your marketing.
           </p>
           <Link
             href="/contact"
