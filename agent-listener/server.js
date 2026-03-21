@@ -25,14 +25,14 @@ app.post('/run-agent', (req, res) => {
     return res.status(400).json({ error: 'Missing required fields: taskId, description, acceptanceCriteria' });
   }
 
-  const criteriaLines = acceptanceCriteria.map((item) => `- ${item}`).join('\n');
+  const prompt = `Read and follow all rules in .claude/agents/code-agent.md before doing anything else.
 
-  const prompt =
-    `You are the Code Agent. Read .claude/agents/code-agent.md.\n` +
-    `Task ID: ${taskId}\n` +
-    `Description: ${description}\n` +
-    `Acceptance criteria:\n` +
-    criteriaLines;
+Task ID: ${taskId}
+Description: ${description}
+Acceptance criteria:
+${acceptanceCriteria.map((c) => `- ${c}`).join('\n')}
+
+Follow all git rules in code-agent.md: create a feature branch, commit your changes, and open a draft PR.`;
 
   // Escape prompt for single-quoted shell argument
   const escapedPrompt = prompt.replace(/'/g, `'\\''`);
