@@ -25,20 +25,30 @@ app.post('/run-agent', (req, res) => {
     return res.status(400).json({ error: 'Missing required fields: taskId, description, acceptanceCriteria' });
   }
 
-  const prompt = `Read and follow all rules in .claude/agents/code-agent.md before doing anything else.
+  const prompt = `You are operating as the Code Agent for the EmployAI project.
 
+Your rules and coding standards are defined in the file .claude/agents/code-agent.md in the project root. Read that file first and follow every rule in it.
+
+Your task is:
 Task ID: ${taskId}
 Description: ${description}
 Acceptance criteria:
 ${acceptanceCriteria.map((c) => `- ${c}`).join('\n')}
 
-Follow all git rules in code-agent.md: create a feature branch, commit your changes, and open a draft PR.`;
+Steps to complete:
+1. Read .claude/agents/code-agent.md
+2. Create a new branch following the naming convention in that file
+3. Implement the task following all coding standards
+4. Run lint, type-check, and build before committing
+5. Commit using Conventional Commits format
+6. Open a draft PR with description of what changed and why`;
 
   try {
     const child = spawn('claude', ['-p', prompt], {
       cwd: PROJECT_ROOT,
-      shell: true,
-      stdio: 'pipe'
+      shell: false,
+      stdio: 'pipe',
+      windowsHide: true
     });
 
     child.stdout.on('data', (data) => {
