@@ -44,7 +44,7 @@ Steps to complete:
 6. Open a draft PR with description of what changed and why`;
 
   try {
-    const child = spawn('claude', ['-p', '-'], {
+    const child = spawn('claude', ['-p', '-', '--dangerously-skip-permissions'], {
       cwd: PROJECT_ROOT,
       shell: true,
       stdio: ['pipe', 'pipe', 'pipe'],
