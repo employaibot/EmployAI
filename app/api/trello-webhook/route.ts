@@ -7,6 +7,15 @@ const CALLBACK_URL = process.env.CALLBACK_URL;
 const AGENT_LISTENER_URL = process.env.AGENT_LISTENER_URL;
 const AGENT_SECRET = process.env.AGENT_SECRET;
 
+function slugify(text: string): string {
+  return text
+    .toLowerCase()
+    .replace(/[^a-z0-9\s-]/g, '')
+    .trim()
+    .replace(/\s+/g, '-')
+    .slice(0, 50)
+}
+
 function verifyTrelloSignature(
   body: string,
   headerSignature: string | null,
@@ -30,6 +39,7 @@ async function forwardToAgentListener(
   cardName: string,
   cardDesc: string,
   acceptanceCriteria: string[],
+  branchSlug: string,
 ): Promise<void> {
   if (!AGENT_LISTENER_URL || !AGENT_SECRET) {
     console.warn(
@@ -47,6 +57,7 @@ async function forwardToAgentListener(
       },
       body: JSON.stringify({
         taskId,
+        branchSlug,
         description: `${cardName} — ${cardDesc}`,
         acceptanceCriteria,
       }),
@@ -112,7 +123,8 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
       `Acceptance criteria:\n${acceptanceCriteria.map((c) => `- ${c}`).join("\n")}`,
     );
 
-    await forwardToAgentListener(card.id, card.name, card.desc, acceptanceCriteria);
+    const branchSlug = slugify(card.name)
+    await forwardToAgentListener(card.id, card.name, card.desc, acceptanceCriteria, branchSlug);
 
     return NextResponse.json({ received: true }, { status: 200 });
   } catch (error) {

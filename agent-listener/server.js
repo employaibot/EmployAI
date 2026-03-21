@@ -19,7 +19,7 @@ app.post('/run-agent', (req, res) => {
     return res.status(401).json({ error: 'Unauthorized' });
   }
 
-  const { taskId, description, acceptanceCriteria } = req.body;
+  const { taskId, branchSlug, description, acceptanceCriteria } = req.body;
 
   if (!taskId || !description || !Array.isArray(acceptanceCriteria)) {
     return res.status(400).json({ error: 'Missing required fields: taskId, description, acceptanceCriteria' });
@@ -35,13 +35,9 @@ Description: ${description}
 Acceptance criteria:
 ${acceptanceCriteria.map((c) => `- ${c}`).join('\n')}
 
-Steps to complete:
-1. Read .claude/agents/code-agent.md
-2. Create a new branch following the naming convention in that file
-3. Implement the task following all coding standards
-4. Run lint, type-check, and build before committing
-5. Commit using Conventional Commits format
-6. Open a draft PR with description of what changed and why`;
+Your branch name must be: feature/${branchSlug || taskId}
+
+Follow all rules in .claude/agents/code-agent.md. Open a draft PR.`;
 
   try {
     const child = spawn('claude', ['-p', '-', '--dangerously-skip-permissions'], {
