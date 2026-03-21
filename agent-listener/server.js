@@ -48,7 +48,11 @@ Steps to complete:
       cwd: PROJECT_ROOT,
       shell: true,
       stdio: ['pipe', 'pipe', 'pipe'],
-      windowsHide: true
+      windowsHide: true,
+      env: {
+        ...process.env,
+        PATH: process.env.PATH
+      }
     });
 
     child.stdin.write(prompt);
