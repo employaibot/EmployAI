@@ -1,9 +1,29 @@
+import crypto from "crypto";
 import { NextRequest, NextResponse } from "next/server";
 import type { TrelloWebhookPayload } from "./types";
 
 const TRELLO_WEBHOOK_SECRET = process.env.TRELLO_WEBHOOK_SECRET;
+const CALLBACK_URL = process.env.CALLBACK_URL;
 const AGENT_LISTENER_URL = process.env.AGENT_LISTENER_URL;
 const AGENT_SECRET = process.env.AGENT_SECRET;
+
+function verifyTrelloSignature(
+  body: string,
+  headerSignature: string | null,
+): boolean {
+  if (!headerSignature || !TRELLO_WEBHOOK_SECRET || !CALLBACK_URL) {
+    return false;
+  }
+  const content = body + CALLBACK_URL;
+  const expected = crypto
+    .createHmac("sha1", TRELLO_WEBHOOK_SECRET)
+    .update(content)
+    .digest("base64");
+  return crypto.timingSafeEqual(
+    Buffer.from(headerSignature),
+    Buffer.from(expected),
+  );
+}
 
 async function forwardToAgentListener(
   taskId: string,
@@ -54,13 +74,15 @@ export async function GET(): Promise<NextResponse> {
 }
 
 export async function POST(request: NextRequest): Promise<NextResponse> {
-  const secret = request.headers.get("x-trello-webhook");
-  if (!secret || secret !== TRELLO_WEBHOOK_SECRET) {
+  const body = await request.text();
+  const headerSignature = request.headers.get("x-trello-webhook");
+
+  if (!verifyTrelloSignature(body, headerSignature)) {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
   }
 
   try {
-    const payload: TrelloWebhookPayload = await request.json();
+    const payload: TrelloWebhookPayload = JSON.parse(body) as TrelloWebhookPayload;
     const { action } = payload;
 
     if (action.type !== "updateCard") {
