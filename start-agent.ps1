@@ -1,5 +1,5 @@
-$envFile = Join-Path $PSScriptRoot ".env.local"
-$agentSecret = ((Get-Content $envFile | Where-Object { $_ -match '^AGENT_SECRET=' }) -replace '^AGENT_SECRET=', '').Trim()
+$envFile = "$PSScriptRoot\.env.local"
+$agentSecret = (Get-Content $envFile | Where-Object { $_ -match '^AGENT_SECRET=' } | Select-Object -First 1) -replace '^AGENT_SECRET=', ''
 
 Start-Process powershell -ArgumentList '-NoExit', '-Command', 'ngrok http 3001'
 
