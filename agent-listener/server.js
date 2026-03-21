@@ -55,11 +55,19 @@ Steps to complete:
     child.stdin.end();
 
     child.stdout.on('data', (data) => {
-      console.log(`[agent-listener] Task ${taskId} output:`, data.toString());
+      const lines = data.toString().split('\n').filter(line => line.trim());
+      lines.forEach(line => {
+        process.stdout.write(`\r\x1b[K`);
+        console.log(`  \x1b[36m[claude]\x1b[0m ${line}`);
+      });
     });
 
     child.stderr.on('data', (data) => {
-      console.error(`[agent-listener] Task ${taskId} error:`, data.toString());
+      const lines = data.toString().split('\n').filter(line => line.trim());
+      lines.forEach(line => {
+        process.stdout.write(`\r\x1b[K`);
+        console.log(`  \x1b[33m[claude:warn]\x1b[0m ${line}`);
+      });
     });
 
     child.on('close', (code) => {
