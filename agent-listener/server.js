@@ -1,5 +1,5 @@
 import express from 'express';
-import { exec } from 'child_process';
+import { spawn } from 'child_process';
 import { resolve, dirname } from 'path';
 import { fileURLToPath } from 'url';
 
@@ -34,16 +34,26 @@ ${acceptanceCriteria.map((c) => `- ${c}`).join('\n')}
 
 Follow all git rules in code-agent.md: create a feature branch, commit your changes, and open a draft PR.`;
 
-  // Escape prompt for single-quoted shell argument
-  const escapedPrompt = prompt.replace(/'/g, `'\\''`);
-  const command = `claude '${escapedPrompt}'`;
-
   try {
-    exec(command, { cwd: PROJECT_ROOT }, (error) => {
-      if (error) {
-        console.error(`[agent-listener] Task ${taskId} — claude exited with error:`, error.message);
-      } else {
+    const child = spawn('claude', ['-p', prompt], {
+      cwd: PROJECT_ROOT,
+      shell: true,
+      stdio: 'pipe'
+    });
+
+    child.stdout.on('data', (data) => {
+      console.log(`[agent-listener] Task ${taskId} output:`, data.toString());
+    });
+
+    child.stderr.on('data', (data) => {
+      console.error(`[agent-listener] Task ${taskId} error:`, data.toString());
+    });
+
+    child.on('close', (code) => {
+      if (code === 0) {
         console.log(`[agent-listener] Task ${taskId} — claude finished successfully.`);
+      } else {
+        console.error(`[agent-listener] Task ${taskId} — claude exited with code ${code}`);
       }
     });
 
