@@ -5,7 +5,8 @@ $ngrokProc = Start-Process powershell -ArgumentList '-NoExit', '-Command', 'ngro
 
 Start-Sleep -Seconds 3
 
-$nodeProc = Start-Process powershell -ArgumentList '-NoExit', '-Command', "cd `"$PSScriptRoot\agent-listener`"; `$env:AGENT_SECRET='" + $agentSecret + "'; node server.js" -PassThru
+$nodeCommand = "cd '$PSScriptRoot\agent-listener'; `$env:AGENT_SECRET='$agentSecret'; node server.js"
+$nodeProc = Start-Process powershell -ArgumentList '-NoExit', '-Command', $nodeCommand -PassThru
 
 "$($ngrokProc.Id)`n$($nodeProc.Id)" | Set-Content "$PSScriptRoot\.agent-pids"
 
