@@ -44,12 +44,15 @@ Steps to complete:
 6. Open a draft PR with description of what changed and why`;
 
   try {
-    const child = spawn('claude', ['-p', prompt], {
+    const child = spawn('claude', ['-p', '-'], {
       cwd: PROJECT_ROOT,
-      shell: false,
-      stdio: 'pipe',
+      shell: true,
+      stdio: ['pipe', 'pipe', 'pipe'],
       windowsHide: true
     });
+
+    child.stdin.write(prompt);
+    child.stdin.end();
 
     child.stdout.on('data', (data) => {
       console.log(`[agent-listener] Task ${taskId} output:`, data.toString());
