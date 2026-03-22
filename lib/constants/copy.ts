@@ -12,3 +12,34 @@ export const HERO_COPY = {
     { value: "100%", label: "Done For You" },
   ],
 } as const;
+
+export const NAV_COPY = {
+  brand: "EmployAI",
+  cta: "Book a Consultation",
+} as const;
+
+export const ABOUT_COPY = {
+  heading: "We're Obsessed With Your Growth",
+  subheading:
+    "EmployAI combines cutting-edge AI with proven marketing strategy to deliver real, measurable results for growing businesses.",
+  cards: [
+    {
+      icon: "🎯",
+      title: "Who We Are",
+      description:
+        "A dedicated team of AI specialists and marketing strategists working as a seamless extension of your business.",
+    },
+    {
+      icon: "⚡",
+      title: "What We Do",
+      description:
+        "We run your entire marketing operation — from strategy and content creation to automation and performance analytics.",
+    },
+    {
+      icon: "📈",
+      title: "Why It Works",
+      description:
+        "AI learns what converts for your specific audience. Our systems adapt continuously, so your marketing gets sharper over time.",
+    },
+  ],
+} as const;
