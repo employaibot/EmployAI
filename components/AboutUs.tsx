@@ -4,7 +4,7 @@ export function AboutUs() {
   return (
     <section
       id="about"
-      className="bg-white px-6 py-20 sm:py-28 lg:px-8"
+      className="scroll-mt-16 bg-white px-6 py-20 sm:py-28 lg:px-8"
     >
       <div className="mx-auto max-w-4xl text-center">
         <h2 className="font-display text-4xl font-extrabold tracking-tight text-gray-900 sm:text-5xl">
@@ -13,7 +13,7 @@ export function AboutUs() {
         <p className="mx-auto mt-6 max-w-2xl text-lg leading-relaxed text-gray-500">
           {ABOUT_COPY.subheading}
         </p>
-        <div className="mt-16 grid grid-cols-1 gap-6 sm:grid-cols-3">
+        <div className="mt-16 grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3">
           {ABOUT_COPY.cards.map((card) => (
             <div
               key={card.title}

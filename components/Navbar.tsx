@@ -11,7 +11,7 @@ export function Navbar() {
       >
         <Link
           href="/"
-          className="font-display text-xl font-extrabold tracking-tight text-gray-900 hover:opacity-80 transition-opacity duration-200"
+          className="font-display text-xl font-extrabold tracking-tight text-gray-900 hover:opacity-80 transition-opacity duration-200 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
         >
           {NAV_COPY.brand}
         </Link>

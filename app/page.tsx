@@ -11,7 +11,7 @@ export default function HomePage() {
       {/* CTA Section */}
       <section className="px-4 py-16 sm:px-6 sm:py-24 lg:px-8">
         <div className="mx-auto max-w-2xl text-center">
-          <h2 className="text-3xl font-bold text-gray-900 sm:text-4xl">
+          <h2 className="font-display text-3xl font-extrabold text-gray-900 sm:text-4xl">
             Ready to grow your business?
           </h2>
           <p className="mt-4 text-lg text-gray-600">
