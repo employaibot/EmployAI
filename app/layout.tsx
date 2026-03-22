@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Syne } from "next/font/google";
 import { GoogleAnalytics } from "@next/third-parties/google";
+import { Navbar } from "@/components/Navbar";
 import "@/app/globals.css";
 
 const syne = Syne({
@@ -40,7 +41,8 @@ export default function RootLayout({
         <meta charSet="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
       </head>
-      <body className="min-h-screen bg-white text-gray-900">
+      <body className="min-h-screen bg-white pt-16 text-gray-900">
+        <Navbar />
         {children}
         {process.env.NEXT_PUBLIC_GA_ID && (
           <GoogleAnalytics gaId={process.env.NEXT_PUBLIC_GA_ID} />
