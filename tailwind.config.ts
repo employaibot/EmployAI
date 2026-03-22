@@ -13,6 +13,7 @@ const config: Config = {
       },
       fontFamily: {
         sans: ["system-ui", "sans-serif"],
+        display: ["var(--font-syne)", "system-ui", "sans-serif"],
       },
     },
   },

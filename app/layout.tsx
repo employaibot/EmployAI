@@ -1,6 +1,14 @@
 import type { Metadata } from "next";
+import { Syne } from "next/font/google";
 import { GoogleAnalytics } from "@next/third-parties/google";
 import "@/app/globals.css";
+
+const syne = Syne({
+  subsets: ["latin"],
+  weight: ["400", "700", "800"],
+  variable: "--font-syne",
+  display: "swap",
+});
 
 export const metadata: Metadata = {
   title: "EmployAI | Done-For-You AI Marketing for Growing Businesses",
@@ -27,7 +35,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html lang="en" suppressHydrationWarning className={syne.variable}>
       <head>
         <meta charSet="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
