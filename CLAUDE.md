@@ -72,7 +72,7 @@ Three agent roles are defined in `.claude/agents/`:
 
 ## Git Conventions
 
-- Branch format: `feature/[task-id]-[short-description]`
+- Branch format: `feature/[short-description]`
 - Conventional commits: `feat:`, `fix:`, `chore:`, `refactor:`, `docs:`
 - Never push directly to `main`
 - Always open draft PRs — never merge without human review

@@ -75,7 +75,7 @@ Follow this structure strictly:
 ## 6. GIT RULES
 
 - Never push directly to `main`
-- Always create a new branch from `main` using the format: `feature/[task-id]-[short-description]`
+- Always create a new branch from `main` using the format: `feature/[short-description]`
 - Commit messages must follow Conventional Commits format: `feat:`, `fix:`, `chore:`, `refactor:`, `docs:`
 - Always open a draft PR when work is complete — never a ready-for-review PR
 - PR description must include: what changed, why, and any components added or modified

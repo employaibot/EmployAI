@@ -21,8 +21,8 @@ app.post('/run-agent', (req, res) => {
 
   const { taskId, branchSlug, description, acceptanceCriteria } = req.body;
 
-  if (!taskId || !description || !Array.isArray(acceptanceCriteria)) {
-    return res.status(400).json({ error: 'Missing required fields: taskId, description, acceptanceCriteria' });
+  if (!taskId || !branchSlug || !description || !Array.isArray(acceptanceCriteria)) {
+    return res.status(400).json({ error: 'Missing required fields: taskId, branchSlug, description, acceptanceCriteria' });
   }
 
   const prompt = `You are operating as the Code Agent for the EmployAI project.
@@ -35,12 +35,12 @@ Description: ${description}
 Acceptance criteria:
 ${acceptanceCriteria.map((c) => `- ${c}`).join('\n')}
 
-Your branch name must be: feature/${branchSlug || taskId}
+Your branch name must be: feature/${branchSlug}
 
 Follow all rules in .claude/agents/code-agent.md. Open a draft PR.`;
 
   try {
-    const child = spawn('claude', ['-p', '-', '--dangerously-skip-permissions'], {
+    const child = spawn('claude', ['-p', '-', '--dangerously-skip-permissions', '--verbose'], {
       cwd: PROJECT_ROOT,
       shell: true,
       stdio: ['pipe', 'pipe', 'pipe'],
