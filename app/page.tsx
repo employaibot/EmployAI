@@ -1,35 +1,10 @@
+import { Hero } from "@/components/Hero";
 import Link from "next/link";
 
 export default function HomePage() {
   return (
     <main className="min-h-screen bg-white">
-      {/* Hero Section */}
-      <section className="px-4 py-16 sm:px-6 sm:py-24 lg:px-8 lg:py-32">
-        <div className="mx-auto max-w-4xl text-center">
-          <h1 className="text-4xl font-bold tracking-tight text-gray-900 sm:text-5xl lg:text-6xl">
-            Done-For-You AI Marketing
-          </h1>
-          <p className="mt-6 text-xl text-gray-600 sm:text-2xl">
-            EmployAI helps growing businesses automate their marketing, scale
-            their reach, and convert more customers with AI-powered strategies
-            tailored to your business.
-          </p>
-          <div className="mt-10 flex flex-col gap-4 sm:flex-row sm:justify-center">
-            <Link
-              href="/contact"
-              className="rounded-lg bg-blue-600 px-8 py-3 font-semibold text-white transition-colors hover:bg-blue-700"
-            >
-              Book a Consultation
-            </Link>
-            <a
-              href="#services"
-              className="rounded-lg border border-gray-300 px-8 py-3 font-semibold text-gray-900 transition-colors hover:bg-gray-50"
-            >
-              Learn More
-            </a>
-          </div>
-        </div>
-      </section>
+      <Hero />
 
       {/* Services Section */}
       <section
