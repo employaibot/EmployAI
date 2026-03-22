@@ -24,22 +24,22 @@ export function Hero() {
   return (
     <section
       aria-label="Hero"
-      className="relative flex min-h-screen flex-col justify-center overflow-hidden bg-[#080810] px-6 sm:px-12 lg:px-20"
+      className="relative flex min-h-screen flex-col items-center justify-center overflow-hidden bg-[#080810] px-6 sm:px-12 lg:px-20"
     >
-      {/* Blue glow blob — top right */}
+      {/* Blue glow blob — center top */}
       <div
         aria-hidden="true"
-        className="pointer-events-none absolute right-0 top-0 h-[700px] w-[700px]"
+        className="pointer-events-none absolute left-1/2 top-0 h-[700px] w-[700px] -translate-x-1/2"
         style={{
           background:
-            "radial-gradient(circle at 65% 25%, rgba(37,99,235,0.2) 0%, transparent 68%)",
+            "radial-gradient(circle at 50% 20%, rgba(37,99,235,0.22) 0%, transparent 68%)",
           filter: "blur(48px)",
         }}
       />
 
       {/* Subtle grid overlay */}
       <div
-        aria-hidden
+        aria-hidden="true"
         className="pointer-events-none absolute inset-0 opacity-[0.025]"
         style={{
           backgroundImage: `
@@ -54,10 +54,10 @@ export function Hero() {
         variants={container}
         initial="hidden"
         animate="show"
-        className="relative z-10 max-w-5xl"
+        className="relative z-10 mx-auto w-full max-w-4xl text-center"
       >
         {/* Badge */}
-        <motion.div variants={item}>
+        <motion.div variants={item} className="flex justify-center">
           <span className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-4 py-1.5 text-xs font-medium uppercase tracking-widest text-white/50">
             <span
               aria-hidden="true"
@@ -74,7 +74,7 @@ export function Hero() {
         >
           {HERO_COPY.headlineLines.map((line, i) => (
             <span
-              key={i}
+              key={line}
               className={`block ${
                 i === HERO_COPY.accentLineIndex ? "text-primary" : "text-white"
               }`}
@@ -87,17 +87,20 @@ export function Hero() {
         {/* Subheadline */}
         <motion.p
           variants={item}
-          className="mt-8 max-w-xl text-lg leading-relaxed text-white/50 sm:text-xl"
+          className="mx-auto mt-8 max-w-xl text-lg leading-relaxed text-white/50 sm:text-xl"
         >
           {HERO_COPY.subheadline}
         </motion.p>
 
         {/* CTAs */}
-        <motion.div variants={item} className="mt-10 flex flex-wrap gap-4">
+        <motion.div
+          variants={item}
+          className="mt-10 flex flex-wrap justify-center gap-4"
+        >
           <Button href="/contact" variant="primary" size="lg">
             {HERO_COPY.primaryCta}
           </Button>
-          <Button href="#services" variant="outline" size="lg">
+          <Button href="#about" variant="outline" size="lg">
             {HERO_COPY.secondaryCta}
           </Button>
         </motion.div>
@@ -105,7 +108,7 @@ export function Hero() {
         {/* Stats strip */}
         <motion.div
           variants={item}
-          className="mt-16 flex flex-wrap gap-x-10 gap-y-6 border-t border-white/10 pt-8"
+          className="mt-16 flex flex-wrap justify-center gap-x-10 gap-y-6 border-t border-white/10 pt-8"
         >
           {HERO_COPY.stats.map((stat) => (
             <div key={stat.label}>
