@@ -19,6 +19,7 @@ node_modules/
 
 # Agent listener
 agent-listener/.env
+.agent-windows
 
 # Vercel
 .vercel
