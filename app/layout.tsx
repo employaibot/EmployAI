@@ -1,6 +1,15 @@
 import type { Metadata } from "next";
+import { Syne } from "next/font/google";
 import { GoogleAnalytics } from "@next/third-parties/google";
+import { Navbar } from "@/components/Navbar";
 import "@/app/globals.css";
+
+const syne = Syne({
+  subsets: ["latin"],
+  weight: ["400", "700", "800"],
+  variable: "--font-syne",
+  display: "swap",
+});
 
 export const metadata: Metadata = {
   title: "EmployAI | Done-For-You AI Marketing for Growing Businesses",
@@ -27,17 +36,18 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html lang="en" suppressHydrationWarning className={syne.variable}>
       <head>
         <meta charSet="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
       </head>
-      <body className="min-h-screen bg-white text-gray-900">
+      <body className="min-h-screen bg-white pt-16 text-gray-900">
+        <Navbar />
         {children}
+        {process.env.NEXT_PUBLIC_GA_ID && (
+          <GoogleAnalytics gaId={process.env.NEXT_PUBLIC_GA_ID} />
+        )}
       </body>
-      {process.env.NEXT_PUBLIC_GA_ID && (
-        <GoogleAnalytics gaId={process.env.NEXT_PUBLIC_GA_ID} />
-      )}
     </html>
   );
 }
