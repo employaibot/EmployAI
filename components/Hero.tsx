@@ -28,7 +28,7 @@ export function Hero() {
     >
       {/* Blue glow blob — top right */}
       <div
-        aria-hidden
+        aria-hidden="true"
         className="pointer-events-none absolute right-0 top-0 h-[700px] w-[700px]"
         style={{
           background:
@@ -60,7 +60,7 @@ export function Hero() {
         <motion.div variants={item}>
           <span className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-4 py-1.5 text-xs font-medium uppercase tracking-widest text-white/50">
             <span
-              aria-hidden
+              aria-hidden="true"
               className="h-1.5 w-1.5 rounded-full bg-primary"
             />
             {HERO_COPY.badge}
@@ -112,7 +112,7 @@ export function Hero() {
               <div className="font-display text-3xl font-extrabold text-white">
                 {stat.value}
               </div>
-              <div className="mt-1 text-sm text-white/40">{stat.label}</div>
+              <div className="mt-1 text-sm text-white/50">{stat.label}</div>
             </div>
           ))}
         </motion.div>
