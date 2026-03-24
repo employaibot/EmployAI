@@ -4,121 +4,84 @@ import { motion } from "framer-motion";
 import { HERO_COPY } from "@/lib/constants/copy";
 import { Button } from "@/components/ui/Button";
 
-const container = {
-  hidden: {},
-  show: {
-    transition: { staggerChildren: 0.12, delayChildren: 0.05 },
-  },
-};
-
-const item = {
-  hidden: { opacity: 0, y: 36 },
-  show: {
-    opacity: 1,
-    y: 0,
-    transition: { duration: 0.75, ease: [0.22, 1, 0.36, 1] },
-  },
+const fadeUp = {
+  hidden: { opacity: 0, y: 24 },
+  show: { opacity: 1, y: 0, transition: { duration: 0.8, ease: [0.22, 1, 0.36, 1] } },
 };
 
 export function Hero() {
   return (
     <section
       aria-label="Hero"
-      className="relative flex min-h-screen flex-col items-center justify-center overflow-hidden bg-[#080810] px-6 sm:px-12 lg:px-20"
+      className="relative flex min-h-screen flex-col items-center justify-center overflow-hidden bg-[#0D1B4B] px-6 sm:px-12 lg:px-20"
+      style={{
+        background: "linear-gradient(135deg, #0D1B4B 0%, #1A3A8F 100%)",
+      }}
     >
-      {/* Blue glow blob — center top */}
+      {/* Dot pattern overlay */}
       <div
         aria-hidden="true"
-        className="pointer-events-none absolute left-1/2 top-0 h-[700px] w-[700px] -translate-x-1/2"
+        className="pointer-events-none absolute inset-0"
         style={{
-          background:
-            "radial-gradient(circle at 50% 20%, rgba(37,99,235,0.22) 0%, transparent 68%)",
-          filter: "blur(48px)",
+          backgroundImage:
+            "radial-gradient(rgba(255,255,255,0.06) 1px, transparent 1px)",
+          backgroundSize: "28px 28px",
         }}
       />
 
-      {/* Subtle grid overlay */}
+      {/* Top glow */}
       <div
         aria-hidden="true"
-        className="pointer-events-none absolute inset-0 opacity-[0.025]"
+        className="pointer-events-none absolute left-1/2 top-0 h-[500px] w-[900px] -translate-x-1/2"
         style={{
-          backgroundImage: `
-            linear-gradient(rgba(255,255,255,0.6) 1px, transparent 1px),
-            linear-gradient(90deg, rgba(255,255,255,0.6) 1px, transparent 1px)
-          `,
-          backgroundSize: "80px 80px",
+          background:
+            "radial-gradient(ellipse at 50% 0%, rgba(11,92,255,0.3) 0%, transparent 65%)",
+          filter: "blur(40px)",
         }}
       />
 
       <motion.div
-        variants={container}
+        variants={fadeUp}
         initial="hidden"
         animate="show"
         className="relative z-10 mx-auto w-full max-w-4xl text-center"
       >
-        {/* Badge */}
-        <motion.div variants={item} className="flex justify-center">
-          <span className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-4 py-1.5 text-xs font-medium uppercase tracking-widest text-white/50">
-            <span
-              aria-hidden="true"
-              className="h-1.5 w-1.5 rounded-full bg-primary"
-            />
-            {HERO_COPY.badge}
-          </span>
-        </motion.div>
+        <span className="inline-flex items-center rounded-full border border-white/20 bg-white/5 px-4 py-1.5 text-xs font-semibold uppercase tracking-widest text-white/70">
+          {HERO_COPY.badge}
+        </span>
 
-        {/* Headline */}
-        <motion.h1
-          variants={item}
-          className="mt-8 font-display text-[clamp(3rem,9vw,7.5rem)] font-extrabold uppercase leading-[0.92] tracking-tight"
-        >
-          {HERO_COPY.headlineLines.map((line, i) => (
-            <span
-              key={line}
-              className={`block ${
-                i === HERO_COPY.accentLineIndex ? "text-primary" : "text-white"
-              }`}
-            >
-              {line}
-            </span>
-          ))}
-        </motion.h1>
+        <h1 className="mt-6 font-display text-[clamp(2.5rem,6vw,4rem)] font-extrabold leading-tight tracking-tight text-white">
+          {HERO_COPY.headline}
+        </h1>
 
-        {/* Subheadline */}
-        <motion.p
-          variants={item}
-          className="mx-auto mt-8 max-w-xl text-lg leading-relaxed text-white/50 sm:text-xl"
-        >
+        <p className="mx-auto mt-6 max-w-2xl text-lg leading-relaxed text-white/70 sm:text-xl">
           {HERO_COPY.subheadline}
-        </motion.p>
+        </p>
 
-        {/* CTAs */}
-        <motion.div
-          variants={item}
-          className="mt-10 flex flex-wrap justify-center gap-4"
-        >
+        <div className="mt-10 flex flex-wrap justify-center gap-4">
           <Button href="/contact" variant="primary" size="lg">
             {HERO_COPY.primaryCta}
           </Button>
           <Button href="#about" variant="outline" size="lg">
             {HERO_COPY.secondaryCta}
           </Button>
-        </motion.div>
+        </div>
 
-        {/* Stats strip */}
-        <motion.div
-          variants={item}
-          className="mt-16 flex flex-wrap justify-center gap-x-10 gap-y-6 border-t border-white/10 pt-8"
-        >
+        <div className="mt-16 flex flex-wrap justify-center gap-4">
           {HERO_COPY.stats.map((stat) => (
-            <div key={stat.label}>
+            <div
+              key={stat.label}
+              className="rounded-xl border border-white/10 bg-white/5 px-8 py-5 text-center backdrop-blur-sm"
+            >
               <div className="font-display text-3xl font-extrabold text-white">
                 {stat.value}
               </div>
-              <div className="mt-1 text-sm text-white/50">{stat.label}</div>
+              <div className="mt-1 text-sm font-medium text-white/60">
+                {stat.label}
+              </div>
             </div>
           ))}
-        </motion.div>
+        </div>
       </motion.div>
     </section>
   );
