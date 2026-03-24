@@ -19,10 +19,7 @@ export function AboutUs() {
               key={card.title}
               className="rounded-2xl border border-gray-100 bg-gray-50 p-8 text-left shadow-sm"
             >
-              <span aria-hidden="true" className="text-3xl">
-                {card.icon}
-              </span>
-              <h3 className="mt-4 font-display text-lg font-extrabold text-gray-900">
+              <h3 className="font-display text-lg font-extrabold text-gray-900">
                 {card.title}
               </h3>
               <p className="mt-3 text-sm leading-relaxed text-gray-500">
