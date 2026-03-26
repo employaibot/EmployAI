@@ -10,7 +10,7 @@ export function CTABanner() {
       <motion.div
         initial={{ opacity: 0, y: 30 }}
         whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true, margin: "-80px" }}
+        viewport={{ once: true, margin: "0px" }}
         transition={{ duration: 0.6 }}
         className="mx-auto max-w-4xl rounded-3xl bg-[#F0F4F8] px-10 py-16 text-center"
       >

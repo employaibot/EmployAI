@@ -15,7 +15,7 @@ export function Testimonials() {
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-80px" }}
+          viewport={{ once: true, margin: "0px" }}
           transition={{ duration: 0.6 }}
           className="text-center"
         >
@@ -38,7 +38,7 @@ export function Testimonials() {
               key={item.name}
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-60px" }}
+              viewport={{ once: true, margin: "0px" }}
               transition={{ duration: 0.5, delay: i * 0.1 }}
               className="rounded-2xl border border-gray-200 bg-white p-8 shadow-sm"
             >
