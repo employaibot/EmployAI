@@ -28,19 +28,16 @@ export const SERVICES_COPY = {
     "We leverage the latest LLMs and predictive models to scale your business without increasing headcount.",
   cards: [
     {
-      icon: "🔍",
       title: "Automated SEO",
       description:
         "AI-driven keyword research, on-page optimization, and backlink strategies that compound over time.",
     },
     {
-      icon: "📊",
       title: "Predictive Analytics",
       description:
         "Machine-learning models that forecast campaign performance and surface high-value audience segments.",
     },
     {
-      icon: "✍️",
       title: "AI Content Engine",
       description:
         "High-volume, brand-consistent content generation across blog, social, and email — at a fraction of the cost.",
@@ -120,19 +117,16 @@ export const ABOUT_COPY = {
     "EmployAI combines cutting-edge AI with proven marketing strategy to deliver real, measurable results for growing businesses.",
   cards: [
     {
-      icon: "🎯",
       title: "Who We Are",
       description:
         "A dedicated team of AI specialists and marketing strategists working as a seamless extension of your business.",
     },
     {
-      icon: "⚡",
       title: "What We Do",
       description:
         "We run your entire marketing operation — from strategy and content creation to automation and performance analytics.",
     },
     {
-      icon: "📈",
       title: "Why It Works",
       description:
         "AI learns what converts for your specific audience. Our systems adapt continuously, so your marketing gets sharper over time.",
