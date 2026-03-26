@@ -10,6 +10,11 @@ const config: Config = {
       colors: {
         primary: "#2563eb",
         secondary: "#1e40af",
+        brand: {
+          DEFAULT: "#0D9488",
+          light: "#14B8A6",
+          dark: "#0F766E",
+        },
       },
       fontFamily: {
         sans: ["system-ui", "sans-serif"],
