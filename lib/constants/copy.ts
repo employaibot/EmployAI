@@ -1,5 +1,4 @@
 export const HERO_COPY = {
-  badge: "NOW POWERED BY GPT-4o + CLAUDE",
   headline: {
     before: "Automate Your",
     accent: "Marketing",
