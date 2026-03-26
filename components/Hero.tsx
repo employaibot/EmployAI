@@ -30,17 +30,10 @@ export function Hero() {
           animate="show"
           className="flex-1 text-left"
         >
-          {/* Badge */}
-          <motion.div variants={fadeUp}>
-            <span className="inline-flex items-center rounded-full bg-brand/10 px-3 py-1 text-xs font-semibold uppercase tracking-widest text-brand">
-              {HERO_COPY.badge}
-            </span>
-          </motion.div>
-
           {/* Headline */}
           <motion.h1
             variants={fadeUp}
-            className="mt-6 font-display text-5xl font-extrabold leading-tight tracking-tight text-gray-900 sm:text-6xl"
+            className="font-display text-[clamp(3rem,9vw,6rem)] font-extrabold uppercase leading-[0.92] tracking-tight text-gray-900"
           >
             {HERO_COPY.headline.before}{" "}
             <span className="text-brand">{HERO_COPY.headline.accent}</span>{" "}
