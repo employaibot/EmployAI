@@ -106,7 +106,7 @@ export const FOOTER_COPY = {
   newsletterLabel: "Stay Updated",
   newsletterPlaceholder: "your@email.com",
   newsletterCta: "Join",
-  legal: "© 2024 EmployAI. All rights reserved.",
+  legal: "© 2026 EmployAI. All rights reserved.",
   legalLinks: ["Privacy Policy", "Terms of Service", "Cookie Policy"],
 } as const;
 
