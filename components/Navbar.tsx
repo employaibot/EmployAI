@@ -1,5 +1,4 @@
 import Link from "next/link";
-import { Button } from "@/components/ui/Button";
 import { NAV_COPY } from "@/lib/constants/copy";
 
 export function Navbar() {
@@ -9,15 +8,38 @@ export function Navbar() {
         className="mx-auto flex h-16 max-w-6xl items-center justify-between px-6 lg:px-8"
         aria-label="Main navigation"
       >
+        {/* Logo */}
         <Link
           href="/"
-          className="font-display text-xl font-extrabold tracking-tight text-gray-900 hover:opacity-80 transition-opacity duration-200 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
+          className="flex items-center gap-2 text-xl font-extrabold tracking-tight text-gray-900 hover:opacity-80 transition-opacity"
         >
+          <span className="flex h-7 w-7 items-center justify-center rounded-md bg-brand text-white text-sm font-black">
+            E
+          </span>
           {NAV_COPY.brand}
         </Link>
-        <Button href="/contact" variant="primary" size="md">
+
+        {/* Center links */}
+        <ul className="hidden md:flex items-center gap-8">
+          {NAV_COPY.links.map((link) => (
+            <li key={link.label}>
+              <Link
+                href={link.href}
+                className="text-sm font-medium text-gray-600 hover:text-brand transition-colors"
+              >
+                {link.label}
+              </Link>
+            </li>
+          ))}
+        </ul>
+
+        {/* CTA */}
+        <Link
+          href="/contact"
+          className="rounded-full bg-brand px-5 py-2 text-sm font-semibold text-white hover:bg-brand-dark transition-colors"
+        >
           {NAV_COPY.cta}
-        </Button>
+        </Link>
       </nav>
     </header>
   );

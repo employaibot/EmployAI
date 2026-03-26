@@ -1,125 +1,96 @@
 "use client";
 
 import { motion } from "framer-motion";
+import Image from "next/image";
+import Link from "next/link";
 import { HERO_COPY } from "@/lib/constants/copy";
-import { Button } from "@/components/ui/Button";
 
-const container = {
-  hidden: {},
-  show: {
-    transition: { staggerChildren: 0.12, delayChildren: 0.05 },
-  },
-};
-
-const item = {
-  hidden: { opacity: 0, y: 36 },
+const fadeUp = {
+  hidden: { opacity: 0, y: 30 },
   show: {
     opacity: 1,
     y: 0,
-    transition: { duration: 0.75, ease: [0.22, 1, 0.36, 1] },
+    transition: { duration: 0.6, ease: [0.22, 1, 0.36, 1] as const },
   },
+};
+
+const container = {
+  hidden: {},
+  show: { transition: { staggerChildren: 0.1, delayChildren: 0.05 } },
 };
 
 export function Hero() {
   return (
-    <section
-      aria-label="Hero"
-      className="relative flex min-h-screen flex-col items-center justify-center overflow-hidden bg-[#080810] px-6 sm:px-12 lg:px-20"
-    >
-      {/* Blue glow blob — center top */}
-      <div
-        aria-hidden="true"
-        className="pointer-events-none absolute left-1/2 top-0 h-[700px] w-[700px] -translate-x-1/2"
-        style={{
-          background:
-            "radial-gradient(circle at 50% 20%, rgba(37,99,235,0.22) 0%, transparent 68%)",
-          filter: "blur(48px)",
-        }}
-      />
-
-      {/* Subtle grid overlay */}
-      <div
-        aria-hidden="true"
-        className="pointer-events-none absolute inset-0 opacity-[0.025]"
-        style={{
-          backgroundImage: `
-            linear-gradient(rgba(255,255,255,0.6) 1px, transparent 1px),
-            linear-gradient(90deg, rgba(255,255,255,0.6) 1px, transparent 1px)
-          `,
-          backgroundSize: "80px 80px",
-        }}
-      />
-
-      <motion.div
-        variants={container}
-        initial="hidden"
-        animate="show"
-        className="relative z-10 mx-auto w-full max-w-4xl text-center"
-      >
-        {/* Badge */}
-        <motion.div variants={item} className="flex justify-center">
-          <span className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-4 py-1.5 text-xs font-medium uppercase tracking-widest text-white/50">
-            <span
-              aria-hidden="true"
-              className="h-1.5 w-1.5 rounded-full bg-primary"
-            />
-            {HERO_COPY.badge}
-          </span>
-        </motion.div>
-
-        {/* Headline */}
-        <motion.h1
-          variants={item}
-          className="mt-8 font-display text-[clamp(3rem,9vw,7.5rem)] font-extrabold uppercase leading-[0.92] tracking-tight"
+    <section aria-label="Hero" className="bg-white px-6 py-20 sm:py-28 lg:px-8">
+      <div className="mx-auto flex max-w-6xl flex-col items-center gap-12 lg:flex-row lg:items-center">
+        {/* Left */}
+        <motion.div
+          variants={container}
+          initial="hidden"
+          animate="show"
+          className="flex-1 text-left"
         >
-          {HERO_COPY.headlineLines.map((line, i) => (
-            <span
-              key={line}
-              className={`block ${
-                i === HERO_COPY.accentLineIndex ? "text-primary" : "text-white"
-              }`}
-            >
-              {line}
+          {/* Badge */}
+          <motion.div variants={fadeUp}>
+            <span className="inline-flex items-center rounded-full bg-brand/10 px-3 py-1 text-xs font-semibold uppercase tracking-widest text-brand">
+              {HERO_COPY.badge}
             </span>
-          ))}
-        </motion.h1>
+          </motion.div>
 
-        {/* Subheadline */}
-        <motion.p
-          variants={item}
-          className="mx-auto mt-8 max-w-xl text-lg leading-relaxed text-white/50 sm:text-xl"
-        >
-          {HERO_COPY.subheadline}
-        </motion.p>
+          {/* Headline */}
+          <motion.h1
+            variants={fadeUp}
+            className="mt-6 font-display text-5xl font-extrabold leading-tight tracking-tight text-gray-900 sm:text-6xl"
+          >
+            {HERO_COPY.headline.before}{" "}
+            <span className="text-brand">{HERO_COPY.headline.accent}</span>{" "}
+            {HERO_COPY.headline.after}
+          </motion.h1>
 
-        {/* CTAs */}
-        <motion.div
-          variants={item}
-          className="mt-10 flex flex-wrap justify-center gap-4"
-        >
-          <Button href="/contact" variant="primary" size="lg">
-            {HERO_COPY.primaryCta}
-          </Button>
-          <Button href="#about" variant="outline" size="lg">
-            {HERO_COPY.secondaryCta}
-          </Button>
+          {/* Subheadline */}
+          <motion.p
+            variants={fadeUp}
+            className="mt-6 max-w-lg text-lg leading-relaxed text-gray-500"
+          >
+            {HERO_COPY.subheadline}
+          </motion.p>
+
+          {/* CTAs */}
+          <motion.div variants={fadeUp} className="mt-8 flex flex-wrap gap-4">
+            <Link
+              href="/contact"
+              className="rounded-full bg-brand px-6 py-3 text-sm font-semibold text-white hover:bg-brand-dark transition-colors"
+            >
+              {HERO_COPY.primaryCta}
+            </Link>
+            <Link
+              href="#results"
+              className="rounded-full border border-gray-300 px-6 py-3 text-sm font-semibold text-gray-700 hover:border-brand hover:text-brand transition-colors"
+            >
+              {HERO_COPY.secondaryCta}
+            </Link>
+          </motion.div>
         </motion.div>
 
-        {/* Stats strip */}
+        {/* Right — avatar */}
         <motion.div
-          variants={item}
-          className="mt-16 flex flex-wrap justify-center gap-x-10 gap-y-6 border-t border-white/10 pt-8"
+          initial={{ opacity: 0, scale: 0.95 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.7, delay: 0.2, ease: [0.22, 1, 0.36, 1] as const }}
+          className="flex flex-1 justify-center"
         >
-          {HERO_COPY.stats.map((stat) => (
-            <div key={stat.label}>
-              <div className="font-display text-3xl font-extrabold text-white">
-                {stat.value}
-              </div>
-              <div className="mt-1 text-sm text-white/50">{stat.label}</div>
-            </div>
-          ))}
+          <div className="relative h-80 w-80 overflow-hidden rounded-3xl shadow-xl sm:h-96 sm:w-96">
+            <div className="absolute inset-0 bg-gradient-to-br from-brand/20 to-teal-100" />
+            <Image
+              src="/hero-avatar.png"
+              alt="EmployAI hero illustration"
+              fill
+              className="object-cover"
+              priority
+            />
+          </div>
         </motion.div>
-      </motion.div>
+      </div>
     </section>
   );
 }

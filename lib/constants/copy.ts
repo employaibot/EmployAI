@@ -1,23 +1,119 @@
 export const HERO_COPY = {
-  badge: "Done-For-You AI Marketing",
-  headlineLines: ["MORE LEADS.", "LESS EFFORT.", "POWERED BY AI."],
-  accentLineIndex: 2,
+  badge: "NOW POWERED BY GPT-4o + CLAUDE",
+  headline: {
+    before: "Automate Your",
+    accent: "Marketing",
+    after: "with AI",
+  },
   subheadline:
-    "EmployAI is your full-service AI marketing team. We build the strategy, create the content, and run the campaigns — 100% done for you.",
-  primaryCta: "Book a Free Consultation",
-  secondaryCta: "See How It Works",
-  stats: [
-    { value: "23+", label: "Active Clients" },
-    { value: "3.2×", label: "Avg. ROI" },
-    { value: "100%", label: "Done For You" },
-  ],
+    "AI-Powered Marketing. Human Results. Predictive power and hyper-personalization built for small businesses.",
+  primaryCta: "Get Started Free",
+  secondaryCta: "View Case Studies",
 } as const;
 
 export const NAV_COPY = {
   brand: "EmployAI",
-  cta: "Book a Consultation",
+  links: [
+    { label: "Services", href: "#services" },
+    { label: "Results", href: "#results" },
+    { label: "Testimonials", href: "#testimonials" },
+    { label: "Pricing", href: "#pricing" },
+  ],
+  cta: "Schedule a Demo",
 } as const;
 
+export const SERVICES_COPY = {
+  heading: "AI-Powered Services",
+  subheading:
+    "We leverage the latest LLMs and predictive models to scale your business without increasing headcount.",
+  cards: [
+    {
+      icon: "🔍",
+      title: "Automated SEO",
+      description:
+        "AI-driven keyword research, on-page optimization, and backlink strategies that compound over time.",
+    },
+    {
+      icon: "📊",
+      title: "Predictive Analytics",
+      description:
+        "Machine-learning models that forecast campaign performance and surface high-value audience segments.",
+    },
+    {
+      icon: "✍️",
+      title: "AI Content Engine",
+      description:
+        "High-volume, brand-consistent content generation across blog, social, and email — at a fraction of the cost.",
+    },
+  ],
+} as const;
+
+export const RESULTS_COPY = {
+  heading: "Proven Results",
+  subheading: "Our clients see measurable impact within the first 30 days.",
+  bullets: [
+    "45% Average Conversion Lift",
+    "12M+ Data Points Analyzed",
+    "80% Reduction in Op-Ex",
+  ],
+} as const;
+
+export const TESTIMONIALS_COPY = {
+  heading: "Trusted by Industry Leaders",
+  items: [
+    {
+      quote:
+        "EmployAI transformed our lead pipeline. We saw a 52% lift in qualified leads within six weeks.",
+      name: "Sarah Chen",
+      title: "CMO, NovaBrand",
+      avatar: "/avatars/sarah.png",
+    },
+    {
+      quote:
+        "The AI content engine alone saved us 30 hours a week. The ROI was undeniable by month one.",
+      name: "Marcus Rivera",
+      title: "Founder, LoopHQ",
+      avatar: "/avatars/marcus.png",
+    },
+    {
+      quote:
+        "Finally, a marketing partner that speaks data. The predictive analytics dashboard is a game changer.",
+      name: "Priya Nair",
+      title: "VP Growth, Stackwise",
+      avatar: "/avatars/priya.png",
+    },
+  ],
+} as const;
+
+export const CTA_COPY = {
+  heading: "Ready to Scale Smarter?",
+  subheading:
+    "Join 500+ brands leveraging EmployAI to dominate their market. Your automated future starts today.",
+  primaryCta: "Schedule a Demo",
+  secondaryCta: "Contact Sales",
+} as const;
+
+export const FOOTER_COPY = {
+  brand: "EmployAI",
+  tagline: "AI-Powered Marketing. Human Results.",
+  columns: [
+    {
+      heading: "Platform",
+      links: ["How it Works", "AI Models", "Integrations", "Pricing"],
+    },
+    {
+      heading: "Company",
+      links: ["About Us", "Careers", "Partners", "Contact"],
+    },
+  ],
+  newsletterLabel: "Stay Updated",
+  newsletterPlaceholder: "your@email.com",
+  newsletterCta: "Join",
+  legal: "© 2024 EmployAI. All rights reserved.",
+  legalLinks: ["Privacy Policy", "Terms of Service", "Cookie Policy"],
+} as const;
+
+// Legacy — retained for contact page
 export const ABOUT_COPY = {
   heading: "We're Obsessed With Your Growth",
   subheading:
