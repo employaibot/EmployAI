@@ -1,6 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
+import Image from "next/image";
 import Link from "next/link";
 import { HERO_COPY } from "@/lib/constants/copy";
 
@@ -21,12 +22,13 @@ const container = {
 export function Hero() {
   return (
     <section aria-label="Hero" className="bg-white px-6 py-20 sm:py-28 lg:px-8">
-      <div className="mx-auto max-w-6xl">
+      <div className="mx-auto flex max-w-6xl flex-col items-center gap-12 lg:flex-row lg:items-center">
+        {/* Left */}
         <motion.div
           variants={container}
           initial="hidden"
           animate="show"
-          className="text-left"
+          className="flex-1 text-left"
         >
           {/* Headline */}
           <motion.h1
@@ -61,6 +63,25 @@ export function Hero() {
               {HERO_COPY.secondaryCta}
             </Link>
           </motion.div>
+        </motion.div>
+
+        {/* Right — avatar */}
+        <motion.div
+          initial={{ opacity: 0, scale: 0.95 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.7, delay: 0.2, ease: [0.22, 1, 0.36, 1] as const }}
+          className="flex flex-1 justify-center"
+        >
+          <div className="relative h-80 w-80 overflow-hidden rounded-3xl shadow-xl sm:h-96 sm:w-96">
+            <div className="absolute inset-0 bg-gradient-to-br from-brand/20 to-teal-100" />
+            <Image
+              src="/hero-avatar.png"
+              alt="EmployAI hero illustration"
+              fill
+              className="object-cover"
+              priority
+            />
+          </div>
         </motion.div>
       </div>
     </section>
