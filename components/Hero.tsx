@@ -1,7 +1,6 @@
 "use client";
 
 import { motion } from "framer-motion";
-import Image from "next/image";
 import Link from "next/link";
 import { HERO_COPY } from "@/lib/constants/copy";
 
@@ -72,16 +71,7 @@ export function Hero() {
           transition={{ duration: 0.7, delay: 0.2, ease: [0.22, 1, 0.36, 1] as const }}
           className="flex flex-1 justify-center"
         >
-          <div className="relative h-80 w-80 overflow-hidden rounded-3xl shadow-xl sm:h-96 sm:w-96">
-            <div className="absolute inset-0 bg-gradient-to-br from-brand/20 to-teal-100" />
-            <Image
-              src="/hero-avatar.png"
-              alt="EmployAI hero illustration"
-              fill
-              className="object-cover"
-              priority
-            />
-          </div>
+          <div className="h-80 w-80 rounded-3xl bg-gradient-to-br from-brand/20 to-teal-100 shadow-xl sm:h-96 sm:w-96" />
         </motion.div>
       </div>
     </section>
