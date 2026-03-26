@@ -13,9 +13,6 @@ export function Navbar() {
           href="/"
           className="flex items-center gap-2 text-xl font-extrabold tracking-tight text-gray-900 hover:opacity-80 transition-opacity"
         >
-          <span className="flex h-7 w-7 items-center justify-center rounded-md bg-brand text-white text-sm font-black">
-            E
-          </span>
           {NAV_COPY.brand}
         </Link>
 
