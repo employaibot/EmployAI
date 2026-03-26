@@ -65,12 +65,14 @@ export function Services() {
               }}
               className="rounded-2xl border border-gray-200 bg-white p-8 shadow-sm"
             >
-              <span aria-hidden="true" className="flex h-10 w-10 items-center justify-center rounded-lg bg-brand/10 text-brand">
-                {serviceIcons[i]}
-              </span>
-              <h3 className="mt-4 font-display text-lg font-bold text-gray-900">
-                {card.title}
-              </h3>
+              <div className="flex items-center gap-3">
+                <span aria-hidden="true" className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-brand/10 text-brand">
+                  {serviceIcons[i]}
+                </span>
+                <h3 className="font-display text-lg font-bold text-gray-900">
+                  {card.title}
+                </h3>
+              </div>
               <p className="mt-3 text-sm leading-relaxed text-gray-500">
                 {card.description}
               </p>
