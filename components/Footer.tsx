@@ -12,9 +12,6 @@ export function Footer() {
           {/* Brand */}
           <div>
             <div className="flex items-center gap-2 text-lg font-extrabold">
-              <span className="flex h-7 w-7 items-center justify-center rounded-md bg-brand text-white text-sm font-black">
-                E
-              </span>
               {FOOTER_COPY.brand}
             </div>
             <p className="mt-3 text-sm text-gray-400">{FOOTER_COPY.tagline}</p>
