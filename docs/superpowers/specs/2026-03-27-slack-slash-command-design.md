@@ -5,7 +5,7 @@
 
 ## Overview
 
-Add a `POST /slack/commands` route to `agent-listener/server.js` that handles Slack's `/create` slash command. The command creates a Trello card in the Backlog list. The integration is self-contained — it does not touch the existing `/run-agent` route or global middleware.
+Add a `POST /slack/commands` route to `agent-listener/server.js` that handles Slack's `/create` slash command. The command uses the `claude` CLI to transform raw user input into a structured ticket, then creates a Trello card in the Backlog list. The integration is self-contained — it does not touch the existing `/run-agent` route or global middleware.
 
 ## Architecture
 
@@ -24,15 +24,25 @@ All new code lives in `agent-listener/server.js`. No new files, no new npm packa
 
 ### Route handler: `POST /slack/commands`
 
-- Reads `command` and `text` from `req.slackBody`
-- If `command !== '/create'` or `text` is empty/whitespace: returns HTTP 200 `{ text: "Usage: /create <task title>" }`
-- Makes a synchronous `fetch` call to `POST https://api.trello.com/1/cards` with query params:
-  - `key=TRELLO_KEY`
-  - `token=TRELLO_TOKEN`
-  - `idList=TRELLO_BACKLOG_LIST_ID`
-  - `name=<text>`
-- On success (Trello 200): returns HTTP 200 `{ text: "Created card: <title>" }`
-- On failure (non-200 from Trello, network error): returns HTTP 200 `{ text: "Failed to create card." }` and logs the error
+1. Reads `command` and `text` from `req.slackBody`
+2. If `command !== '/create'` or `text` is empty/whitespace: returns HTTP 200 `{ text: "Usage: /create <task title>" }`
+3. **Claude CLI ticket formatting (with fallthrough):**
+   - Constructs a prompt asking Claude to return only a JSON object `{ title: string, description: string }` from the raw text
+   - Calls `spawnSync('claude', ['-p', '-'], { input: prompt, encoding: 'utf8', timeout: 2500, shell: true })`
+   - The prompt is passed via **stdin** — never shell-interpolated — eliminating command injection risk
+   - On success: parses `result.stdout.trim()` as JSON; uses `parsed.title` as card name, `parsed.description` as card desc
+   - On any failure (spawnSync throws, non-zero exit, `JSON.parse` throws): falls through to raw text as card name, no description. Card creation is never blocked.
+4. **Trello card creation** via native `fetch`:
+   - `POST https://api.trello.com/1/cards` with query params `key`, `token`, `idList`, `name`, and optionally `desc`
+   - On Trello success: returns HTTP 200 `{ text: "Created card: <title>\n<description>" }` (title/description from Claude if available, otherwise just the raw title)
+   - On Trello failure (non-200 or network error): returns HTTP 200 `{ text: "Failed to create card." }` and logs the error
+
+### Import changes
+
+Add `spawnSync` to the existing `child_process` import:
+```js
+import { spawn, spawnSync } from 'child_process';
+```
 
 ### HTTP status semantics
 
@@ -41,8 +51,9 @@ All new code lives in `agent-listener/server.js`. No new files, no new npm packa
 | Invalid/replayed Slack signature | 400 | (empty) |
 | User not in allowlist | 200 | `{ text: "Not authorized." }` |
 | Missing/empty text | 200 | `{ text: "Usage: /create <task title>" }` |
-| Trello call succeeds | 200 | `{ text: "Created card: <title>" }` |
-| Trello call fails | 200 | `{ text: "Failed to create card." }` |
+| Claude fails, Trello succeeds | 200 | `{ text: "Created card: <raw title>" }` |
+| Claude succeeds, Trello succeeds | 200 | `{ text: "Created card: <title>\n<description>" }` |
+| Trello fails | 200 | `{ text: "Failed to create card." }` |
 
 400 is intentional for auth failures — it signals a misconfigured or spoofed caller, not a Slack user error.
 
@@ -57,6 +68,12 @@ TRELLO_KEY=
 TRELLO_TOKEN=
 TRELLO_BACKLOG_LIST_ID=
 ```
+
+## Security Notes
+
+- Slack signature verification uses `crypto.timingSafeEqual` to prevent timing attacks
+- Claude prompt is passed via stdin to `spawnSync`, never interpolated into a shell command string — immune to command injection regardless of user input content
+- Allowlist is the only user-facing authorization gate; all other checks return HTTP 400
 
 ## What Does Not Change
 
