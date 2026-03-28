@@ -137,7 +137,7 @@ app.post(
   '/slack/commands',
   express.raw({ type: 'application/x-www-form-urlencoded' }),
   verifySlackSignature,
-  (req, res) => {
+  async (req, res) => {
     const params = new URLSearchParams(req.body.toString());
     const slackBody = Object.fromEntries(params.entries());
 
@@ -164,7 +164,9 @@ app.post(
         timeout: 2500,
         shell: true
       });
-      if (result.status === 0 && result.stdout) {
+      if (result.error) {
+        console.error(`[slack] Claude spawn error: ${result.error.message}`);
+      } else if (result.status === 0 && result.stdout) {
         const parsed = JSON.parse(result.stdout.trim());
         if (parsed.title) cardName = parsed.title;
         if (parsed.description) cardDesc = parsed.description;
@@ -184,19 +186,18 @@ app.post(
     trelloUrl.searchParams.set('name', cardName);
     if (cardDesc) trelloUrl.searchParams.set('desc', cardDesc);
 
-    fetch(trelloUrl.toString(), { method: 'POST' })
-      .then((trelloRes) => {
-        if (!trelloRes.ok) {
-          console.error(`[slack] Trello card creation failed: ${trelloRes.status}`);
-          return res.status(200).json({ text: 'Failed to create card.' });
-        }
-        const text = cardDesc ? `Created card: ${cardName}\n${cardDesc}` : `Created card: ${cardName}`;
-        return res.status(200).json({ text });
-      })
-      .catch((err) => {
-        console.error('[slack] Trello card creation error:', err.message);
+    try {
+      const trelloRes = await fetch(trelloUrl.toString(), { method: 'POST' });
+      if (!trelloRes.ok) {
+        console.error(`[slack] Trello card creation failed: ${trelloRes.status}`);
         return res.status(200).json({ text: 'Failed to create card.' });
-      });
+      }
+      const text = cardDesc ? `Created card: ${cardName}\n${cardDesc}` : `Created card: ${cardName}`;
+      return res.status(200).json({ text });
+    } catch (err) {
+      console.error('[slack] Trello card creation error:', err.message);
+      return res.status(200).json({ text: 'Failed to create card.' });
+    }
   }
 );
 
