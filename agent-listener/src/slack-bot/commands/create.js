@@ -11,7 +11,7 @@ export async function handleCreate({ triggerId, board }) {
   const res = await fetch('https://slack.com/api/views.open', {
     method: 'POST',
     headers: {
-      'Content-Type': 'application/json',
+      'Content-Type': 'application/json; charset=utf-8',
       Authorization: `Bearer ${process.env.SLACK_BOT_TOKEN}`,
     },
     body: JSON.stringify({ trigger_id: triggerId, view: modal }),
