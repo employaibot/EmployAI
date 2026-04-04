@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-ENV_FILE="$SCRIPT_DIR/agent-listener/.env"
+ENV_FILE="$SCRIPT_DIR/.env"
 
 # ---------------------------------------------------------------------------
 # OS-specific implementations
@@ -90,7 +90,7 @@ start() {
 
   echo "Starting agent listener..."
   open_terminal "agent-listener" \
-    "cd '$SCRIPT_DIR/agent-listener' && set -a && source .env && set +a && node server.js"
+    "cd '$SCRIPT_DIR/agent-listener' && set -a && source '$SCRIPT_DIR/.env' && set +a && node server.js"
 
   echo "Agent pipeline started in two terminal windows."
 }

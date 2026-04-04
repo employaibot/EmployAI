@@ -1,7 +1,10 @@
 import express from 'express';
-import { spawn } from 'child_process';
+import { spawn, spawnSync } from 'child_process';
+import crypto from 'crypto';
 import { resolve, dirname } from 'path';
 import { fileURLToPath } from 'url';
+import { resolveBoard } from './src/slack-bot/trello/lists.js';
+import { createSlackRouter } from './src/slack-bot/index.js';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const PROJECT_ROOT = resolve(__dirname, '..');
@@ -85,6 +88,17 @@ Follow all rules in .claude/agents/code-agent.md. Open a draft PR.`;
     return res.status(500).json({ error: 'Failed to spawn agent' });
   }
 });
+
+// Resolve Trello board at startup; mount Slack bot if successful
+try {
+  const board = await resolveBoard();
+  console.log(`[agent-listener] Trello board resolved: ${board.lists.length} lists, ${board.members.length} members.`);
+  app.use('/slack', createSlackRouter(board));
+  console.log('[agent-listener] Slack bot mounted at /slack.');
+} catch (err) {
+  console.error(`[agent-listener] Trello startup error — Slack bot disabled: ${err.message}`);
+  console.warn('[agent-listener] Check TRELLO_API_KEY, TRELLO_TOKEN, TRELLO_BOARD_ID in .env');
+}
 
 app.listen(PORT, () => {
   console.log(`[agent-listener] Listening on port ${PORT}`);
