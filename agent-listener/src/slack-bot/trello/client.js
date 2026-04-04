@@ -12,7 +12,7 @@ export async function createCard({ idList, name, desc, due, idMembers }) {
   const payload = { idList, name };
   if (desc) payload.desc = desc;
   if (due) payload.due = due;
-  if (idMembers) payload.idMembers = [idMembers];
+  if (idMembers) payload.idMembers = Array.isArray(idMembers) ? idMembers : [idMembers];
 
   const res = await trelloFetch('/cards', {
     method: 'POST',
