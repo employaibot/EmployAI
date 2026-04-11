@@ -8,17 +8,21 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        primary: "#2563eb",
-        secondary: "#1e40af",
         brand: {
-          DEFAULT: "#0D9488",
-          light: "#14B8A6",
-          dark: "#0F766E",
+          DEFAULT: "#0B5CFF",
+          dark: "#0948D4",
+          light: "#3A7BFF",
+        },
+        navy: {
+          950: "#040D14",
+          900: "#0B2332",
+          800: "#0F2F43",
+          700: "#143D55",
         },
       },
       fontFamily: {
-        sans: ["var(--font-plus-jakarta-sans)", "system-ui", "sans-serif"],
-        display: ["var(--font-plus-jakarta-sans)", "system-ui", "sans-serif"],
+        sans: ["var(--font-lato)", "system-ui", "sans-serif"],
+        display: ["var(--font-lato)", "system-ui", "sans-serif"],
       },
     },
   },

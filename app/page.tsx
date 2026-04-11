@@ -1,19 +1,28 @@
-import { Hero } from "@/components/Hero";
-import { Services } from "@/components/Services";
-import { Results } from "@/components/Results";
-import { Testimonials } from "@/components/Testimonials";
-import { CTABanner } from "@/components/CTABanner";
-import { Footer } from "@/components/Footer";
+import { HeroSection } from "@/components/ui/hero-section-with-smooth-bg-shader";
 
 export default function HomePage() {
   return (
-    <main className="min-h-screen bg-white">
-      <Hero />
-      <Services />
-      <Results />
-      <Testimonials />
-      <CTABanner />
-      <Footer />
+    <main className="h-screen overflow-hidden">
+      <HeroSection
+        brandName="EmployAI"
+        brandNameClassName="text-white/90"
+        title="30-minute strategy for your business."
+        highlightText=""
+        description="Built around your budget and your next 90 days"
+        buttonText="Book a Session"
+        colors={[
+          "#2D8CFF",
+          "#0E72EB",
+          "#003087",
+          "#5AA3FF",
+          "#B3D4FF",
+          "#E8F3FF",
+        ]}
+        distortion={1.2}
+        speed={0.8}
+        veilOpacity="bg-black/30"
+        fontFamily="var(--font-plus-jakarta), 'Plus Jakarta Sans', sans-serif"
+      />
     </main>
   );
 }
