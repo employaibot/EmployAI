@@ -32,8 +32,16 @@ const trafficData = [
   { month: "Jun", visitors: 1200000 },
 ];
 
+const tooltipStyle = {
+  fontSize: 11,
+  backgroundColor: "#0F2F43",
+  border: "1px solid rgba(255,255,255,0.12)",
+  borderRadius: 6,
+  color: "#ffffff",
+};
+
 const fadeUp = {
-  hidden: { opacity: 0, y: 30 },
+  hidden: { opacity: 0, y: 24 },
   show: {
     opacity: 1,
     y: 0,
@@ -41,111 +49,120 @@ const fadeUp = {
   },
 };
 
+const stats = [
+  { value: "45%", label: "Avg. Conversion Lift" },
+  { value: "12M+", label: "Data Points Analyzed" },
+  { value: "80%", label: "OpEx Reduction" },
+];
+
 export function Results() {
   return (
     <section
       id="results"
-      className="scroll-mt-16 bg-white px-6 py-20 sm:py-28 lg:px-8"
+      className="scroll-mt-16 bg-navy-900 px-6 py-20 sm:py-28 lg:px-8"
     >
-      <div className="mx-auto flex max-w-6xl flex-col items-start gap-14 lg:flex-row lg:items-center">
-        {/* Left — copy */}
+      <div className="mx-auto max-w-6xl">
+        {/* Top stat strip — Big Leap style */}
         <motion.div
           initial="hidden"
           whileInView="show"
           viewport={{ once: true, margin: "-80px" }}
           variants={fadeUp}
-          className="flex-1"
+          className="mb-16 grid grid-cols-1 gap-px border border-white/10 sm:grid-cols-3"
         >
-          <h2 className="font-display text-4xl font-extrabold tracking-tight text-gray-900 sm:text-5xl">
-            {RESULTS_COPY.heading}
-          </h2>
-          <p className="mt-4 text-lg text-gray-500">{RESULTS_COPY.subheading}</p>
-          <ul className="mt-8 space-y-4">
-            {RESULTS_COPY.bullets.map((bullet) => (
-              <li
-                key={bullet}
-                className="flex items-center gap-3 font-medium text-gray-800"
-              >
-                <span className="flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-brand/10 text-xs font-bold text-brand">
-                  ✓
-                </span>
-                {bullet}
-              </li>
-            ))}
-          </ul>
+          {stats.map((stat) => (
+            <div
+              key={stat.label}
+              className="flex flex-col items-center gap-1 bg-navy-800/60 px-8 py-10 text-center"
+            >
+              <span className="font-display text-5xl font-black text-brand sm:text-6xl">
+                {stat.value}
+              </span>
+              <span className="mt-1 text-sm font-bold uppercase tracking-widest text-white/40">
+                {stat.label}
+              </span>
+            </div>
+          ))}
         </motion.div>
 
-        {/* Right — charts */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-60px" }}
-          transition={{ duration: 0.6, delay: 0.15, ease: [0.22, 1, 0.36, 1] as const }}
-          className="flex flex-1 flex-col gap-6 sm:flex-row"
-        >
-          {/* Bar chart */}
-          <div className="flex-1 rounded-2xl border border-gray-200 bg-white p-6 shadow-sm">
-            <p className="mb-1 text-sm font-semibold text-gray-700">
-              Conversion Rate
+        {/* Copy + charts */}
+        <div className="flex flex-col gap-14 lg:flex-row lg:items-center">
+          {/* Left */}
+          <motion.div
+            initial="hidden"
+            whileInView="show"
+            viewport={{ once: true, margin: "-80px" }}
+            variants={fadeUp}
+            className="flex-1"
+          >
+            <span className="inline-block rounded-full bg-brand/20 px-4 py-1.5 text-xs font-bold uppercase tracking-widest text-brand">
+              Proven Impact
+            </span>
+            <h2 className="mt-4 font-display text-4xl font-black tracking-tight text-white sm:text-5xl">
+              {RESULTS_COPY.heading}
+            </h2>
+            <p className="mt-4 text-lg leading-relaxed text-white/50">
+              {RESULTS_COPY.subheading}
             </p>
-            <p className="mb-4 text-2xl font-extrabold text-brand">+45.2%</p>
-            <ResponsiveContainer width="100%" height={140}>
-              <BarChart data={conversionData} barSize={16}>
-                <XAxis
-                  dataKey="month"
-                  tick={{ fontSize: 11 }}
-                  axisLine={false}
-                  tickLine={false}
-                />
-                <YAxis hide />
-                <Tooltip
-                  formatter={(value) =>
-                    typeof value === "number"
-                      ? [`${value}%`, "Rate"]
-                      : [String(value), "Rate"]
-                  }
-                  contentStyle={{ fontSize: 12, borderRadius: 8 }}
-                />
-                <Bar dataKey="rate" fill="#0D9488" radius={[4, 4, 0, 0]} />
-              </BarChart>
-            </ResponsiveContainer>
-          </div>
+            <ul className="mt-8 space-y-3">
+              {RESULTS_COPY.bullets.map((bullet) => (
+                <li
+                  key={bullet}
+                  className="flex items-center gap-3 font-medium text-white/70"
+                >
+                  <span className="flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-brand text-[10px] font-black text-white">
+                    ✓
+                  </span>
+                  {bullet}
+                </li>
+              ))}
+            </ul>
+          </motion.div>
 
-          {/* Line chart */}
-          <div className="flex-1 rounded-2xl border border-gray-200 bg-white p-6 shadow-sm">
-            <p className="mb-1 text-sm font-semibold text-gray-700">
-              Organic Traffic
-            </p>
-            <p className="mb-4 text-2xl font-extrabold text-brand">1.2M</p>
-            <ResponsiveContainer width="100%" height={140}>
-              <LineChart data={trafficData}>
-                <CartesianGrid strokeDasharray="3 3" stroke="#F3F4F6" />
-                <XAxis
-                  dataKey="month"
-                  tick={{ fontSize: 11 }}
-                  axisLine={false}
-                  tickLine={false}
-                />
-                <YAxis hide />
-                <Tooltip
-                  formatter={(value) =>
-                    typeof value === "number"
-                      ? [`${(value / 1000).toFixed(0)}k`, "Visitors"]
-                      : [String(value), "Visitors"]
-                  }
-                  contentStyle={{ fontSize: 12, borderRadius: 8 }}
-                />
-                <Line
-                  type="monotone"
-                  dataKey="visitors"
-                  stroke="#0D9488"
-                  strokeWidth={2.5}
-                  dot={false}
-                />
-              </LineChart>
-            </ResponsiveContainer>
-          </div>
-        </motion.div>
+          {/* Right — charts */}
+          <motion.div
+            initial={{ opacity: 0, y: 24 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-60px" }}
+            transition={{ duration: 0.6, delay: 0.15, ease: [0.22, 1, 0.36, 1] as const }}
+            className="flex flex-1 flex-col gap-4 sm:flex-row"
+          >
+            <div className="flex-1 rounded-xl border border-white/10 bg-navy-800/60 p-6">
+              <p className="text-xs font-bold uppercase tracking-widest text-white/40">
+                Conversion Rate
+              </p>
+              <p className="mt-1 font-display text-3xl font-black text-brand">
+                +45.2%
+              </p>
+              <ResponsiveContainer width="100%" height={140} className="mt-4">
+                <BarChart data={conversionData} barSize={14}>
+                  <XAxis dataKey="month" tick={{ fontSize: 10, fill: "rgba(255,255,255,0.4)" }} axisLine={false} tickLine={false} />
+                  <YAxis hide />
+                  <Tooltip formatter={(v) => typeof v === "number" ? [`${v}%`, "Rate"] : [String(v), "Rate"]} contentStyle={tooltipStyle} />
+                  <Bar dataKey="rate" fill="#0B5CFF" radius={[3, 3, 0, 0]} />
+                </BarChart>
+              </ResponsiveContainer>
+            </div>
+
+            <div className="flex-1 rounded-xl border border-white/10 bg-navy-800/60 p-6">
+              <p className="text-xs font-bold uppercase tracking-widest text-white/40">
+                Organic Traffic
+              </p>
+              <p className="mt-1 font-display text-3xl font-black text-brand">
+                1.2M
+              </p>
+              <ResponsiveContainer width="100%" height={140} className="mt-4">
+                <LineChart data={trafficData}>
+                  <CartesianGrid strokeDasharray="3 3" stroke="rgba(255,255,255,0.06)" />
+                  <XAxis dataKey="month" tick={{ fontSize: 10, fill: "rgba(255,255,255,0.4)" }} axisLine={false} tickLine={false} />
+                  <YAxis hide />
+                  <Tooltip formatter={(v) => typeof v === "number" ? [`${(v / 1000).toFixed(0)}k`, "Visitors"] : [String(v), "Visitors"]} contentStyle={tooltipStyle} />
+                  <Line type="monotone" dataKey="visitors" stroke="#0B5CFF" strokeWidth={2.5} dot={false} />
+                </LineChart>
+              </ResponsiveContainer>
+            </div>
+          </motion.div>
+        </div>
       </div>
     </section>
   );
