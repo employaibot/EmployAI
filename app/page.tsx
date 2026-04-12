@@ -11,10 +11,9 @@ export default function HomePage() {
       <HeroSection
         brandName="The Blue Dot Agency"
         brandNameClassName="text-[#0a0a0a]"
-        titleClassName="text-[#0a0a0a]"
-        title="for your business."
-        highlightText="30-minute strategy"
-        highlightFirst
+        titleClassName="text-white"
+        title="30-minute strategy for your business."
+        highlightText=""
         highlightStyle={{
           background: "linear-gradient(90deg, #7B5CF5, #38BDF8)",
           WebkitBackgroundClip: "text",
