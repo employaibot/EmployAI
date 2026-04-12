@@ -92,20 +92,20 @@ export function HeroSection({
         <div className="text-center">
           {brandName && (
             <p
-              className={`font-bold tracking-tight text-foreground text-[clamp(5rem,18vw,14rem)] leading-none mb-4 ${brandNameClassName}`}
+              className={`font-bold tracking-tight text-foreground text-[clamp(3.5rem,12.6vw,9.8rem)] leading-none mb-4 ${brandNameClassName}`}
               style={{ fontFamily, fontWeight: 800 }}
             >
               {brandName}
             </p>
           )}
           <h1
-            className={`font-bold text-foreground text-balance text-4xl sm:text-5xl md:text-6xl xl:text-[80px] leading-tight sm:leading-tight md:leading-tight lg:leading-tight xl:leading-[1.1] mb-6 lg:text-7xl ${titleClassName}`}
+            className={`font-bold text-foreground text-balance text-[25px] sm:text-[34px] md:text-[42px] lg:text-[50px] xl:text-[56px] leading-tight sm:leading-tight md:leading-tight lg:leading-tight xl:leading-[1.1] mb-6 ${titleClassName}`}
             style={{ fontFamily, fontWeight }}
           >
             {title} <span className="text-primary">{highlightText}</span>
           </h1>
           <p
-            className={`text-lg sm:text-xl text-white text-pretty max-w-2xl mx-auto leading-relaxed mb-10 px-4 ${descriptionClassName}`}
+            className={`text-[13px] sm:text-[14px] text-white text-pretty max-w-2xl mx-auto leading-relaxed mb-10 px-4 ${descriptionClassName}`}
           >
             {description}
           </p>
