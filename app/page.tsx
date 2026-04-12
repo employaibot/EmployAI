@@ -10,7 +10,7 @@ export default function HomePage() {
   return (
     <main className="h-screen overflow-hidden">
       <HeroSection
-        brandName="EmployAI"
+        brandName="The Blue Dot Agency"
         brandNameClassName="text-white/90"
         title="30-minute strategy for your business."
         highlightText=""

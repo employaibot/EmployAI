@@ -19,21 +19,21 @@ const plusJakartaSans = Plus_Jakarta_Sans({
 });
 
 export const metadata: Metadata = {
-  title: "EmployAI | Done-For-You AI Marketing for Growing Businesses",
+  title: "The Blue Dot Agency | Done-For-You AI Marketing for Growing Businesses",
   description:
-    "EmployAI helps businesses grow with done-for-you AI powered marketing - from automation and social media to custom creative strategy.",
+    "The Blue Dot Agency helps businesses grow with done-for-you AI powered marketing - from automation and social media to custom creative strategy.",
   openGraph: {
-    title: "EmployAI | Done-For-You AI Marketing for Growing Businesses",
+    title: "The Blue Dot Agency | Done-For-You AI Marketing for Growing Businesses",
     description:
-      "EmployAI helps businesses grow with done-for-you AI powered marketing - from automation and social media to custom creative strategy.",
+      "The Blue Dot Agency helps businesses grow with done-for-you AI powered marketing - from automation and social media to custom creative strategy.",
     url: process.env.NEXT_PUBLIC_SITE_URL || "https://employ-ai.com",
     type: "website",
   },
   twitter: {
     card: "summary_large_image",
-    title: "EmployAI | Done-For-You AI Marketing for Growing Businesses",
+    title: "The Blue Dot Agency | Done-For-You AI Marketing for Growing Businesses",
     description:
-      "EmployAI helps businesses grow with done-for-you AI powered marketing - from automation and social media to custom creative strategy.",
+      "The Blue Dot Agency helps businesses grow with done-for-you AI powered marketing - from automation and social media to custom creative strategy.",
   },
 };
 
