@@ -12,8 +12,9 @@ export default function HomePage() {
         brandName="The Blue Dot Agency"
         brandNameClassName="text-[#0a0a0a]"
         titleClassName="text-[#0a0a0a]"
-        title="30-minute strategy for your business."
-        highlightText=""
+        title="for your business."
+        highlightText="30-minute strategy"
+        highlightFirst
         highlightStyle={{
           background: "linear-gradient(90deg, #7B5CF5, #38BDF8)",
           WebkitBackgroundClip: "text",
