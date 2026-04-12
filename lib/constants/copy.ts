@@ -11,7 +11,7 @@ export const HERO_COPY = {
 } as const;
 
 export const NAV_COPY = {
-  brand: "EmployAI",
+  brand: "The Blue Dot Agency",
   links: [
     { label: "Services", href: "#services" },
     { label: "Results", href: "#results" },
@@ -59,7 +59,7 @@ export const TESTIMONIALS_COPY = {
   items: [
     {
       quote:
-        "EmployAI transformed our lead pipeline. We saw a 52% lift in qualified leads within six weeks.",
+        "The Blue Dot Agency transformed our lead pipeline. We saw a 52% lift in qualified leads within six weeks.",
       name: "Sarah Chen",
       title: "CMO, NovaBrand",
       avatar: "/avatars/sarah.png",
@@ -84,13 +84,13 @@ export const TESTIMONIALS_COPY = {
 export const CTA_COPY = {
   heading: "Ready to Scale Smarter?",
   subheading:
-    "Join 500+ brands leveraging EmployAI to dominate their market. Your automated future starts today.",
+    "Join 500+ brands leveraging The Blue Dot Agency to dominate their market. Your automated future starts today.",
   primaryCta: "Schedule a Demo",
   secondaryCta: "Contact Sales",
 } as const;
 
 export const FOOTER_COPY = {
-  brand: "EmployAI",
+  brand: "The Blue Dot Agency",
   tagline: "AI-Powered Marketing. Human Results.",
   columns: [
     {
@@ -105,7 +105,7 @@ export const FOOTER_COPY = {
   newsletterLabel: "Stay Updated",
   newsletterPlaceholder: "your@email.com",
   newsletterCta: "Join",
-  legal: "© 2026 EmployAI. All rights reserved.",
+  legal: "© 2026 The Blue Dot Agency. All rights reserved.",
   legalLinks: ["Privacy Policy", "Terms of Service", "Cookie Policy"],
 } as const;
 
@@ -113,7 +113,7 @@ export const FOOTER_COPY = {
 export const ABOUT_COPY = {
   heading: "We're Obsessed With Your Growth",
   subheading:
-    "EmployAI combines cutting-edge AI with proven marketing strategy to deliver real, measurable results for growing businesses.",
+    "The Blue Dot Agency combines cutting-edge AI with proven marketing strategy to deliver real, measurable results for growing businesses.",
   cards: [
     {
       title: "Who We Are",

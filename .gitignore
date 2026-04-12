@@ -27,3 +27,6 @@ agent-listener/.env
 # TypeScript
 *.tsbuildinfo
 next-env.d.ts
+
+# Superpowers brainstorm sessions
+.superpowers/

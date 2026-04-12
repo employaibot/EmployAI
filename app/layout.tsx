@@ -1,13 +1,21 @@
 import type { Metadata } from "next";
-import { Lato, Plus_Jakarta_Sans } from "next/font/google";
+import { Lato, Plus_Jakarta_Sans, Sora } from "next/font/google";
 import { GoogleAnalytics } from "@next/third-parties/google";
 import { Navbar } from "@/components/Navbar";
+import { CalendlyProvider } from "@/lib/context/calendly-context";
 import "@/app/globals.css";
 
 const lato = Lato({
   subsets: ["latin"],
   weight: ["300", "400", "700", "900"],
   variable: "--font-lato",
+  display: "swap",
+});
+
+const sora = Sora({
+  subsets: ["latin"],
+  weight: ["400", "600", "800"],
+  variable: "--font-sora",
   display: "swap",
 });
 
@@ -19,21 +27,21 @@ const plusJakartaSans = Plus_Jakarta_Sans({
 });
 
 export const metadata: Metadata = {
-  title: "EmployAI | Done-For-You AI Marketing for Growing Businesses",
+  title: "The Blue Dot Agency | Done-For-You AI Marketing for Growing Businesses",
   description:
-    "EmployAI helps businesses grow with done-for-you AI powered marketing - from automation and social media to custom creative strategy.",
+    "The Blue Dot Agency helps businesses grow with done-for-you AI powered marketing - from automation and social media to custom creative strategy.",
   openGraph: {
-    title: "EmployAI | Done-For-You AI Marketing for Growing Businesses",
+    title: "The Blue Dot Agency | Done-For-You AI Marketing for Growing Businesses",
     description:
-      "EmployAI helps businesses grow with done-for-you AI powered marketing - from automation and social media to custom creative strategy.",
+      "The Blue Dot Agency helps businesses grow with done-for-you AI powered marketing - from automation and social media to custom creative strategy.",
     url: process.env.NEXT_PUBLIC_SITE_URL || "https://employ-ai.com",
     type: "website",
   },
   twitter: {
     card: "summary_large_image",
-    title: "EmployAI | Done-For-You AI Marketing for Growing Businesses",
+    title: "The Blue Dot Agency | Done-For-You AI Marketing for Growing Businesses",
     description:
-      "EmployAI helps businesses grow with done-for-you AI powered marketing - from automation and social media to custom creative strategy.",
+      "The Blue Dot Agency helps businesses grow with done-for-you AI powered marketing - from automation and social media to custom creative strategy.",
   },
 };
 
@@ -46,15 +54,21 @@ export default function RootLayout({
     <html
       lang="en"
       suppressHydrationWarning
-      className={`${lato.variable} ${plusJakartaSans.variable}`}
+      className={`${lato.variable} ${plusJakartaSans.variable} ${sora.variable}`}
     >
       <head>
         <meta charSet="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <link rel="preconnect" href="https://calendly.com" />
+        <link rel="preconnect" href="https://assets.calendly.com" />
+        <link rel="dns-prefetch" href="https://calendly.com" />
+        <link rel="dns-prefetch" href="https://assets.calendly.com" />
       </head>
       <body className="h-screen overflow-hidden bg-white pt-16 text-gray-900">
-        <Navbar />
-        {children}
+        <CalendlyProvider>
+          <Navbar />
+          {children}
+        </CalendlyProvider>
         {process.env.NEXT_PUBLIC_GA_ID && (
           <GoogleAnalytics gaId={process.env.NEXT_PUBLIC_GA_ID} />
         )}
