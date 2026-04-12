@@ -21,7 +21,7 @@ export default function HomePage() {
           backgroundClip: "text",
         }}
         description="Built around your budget and your next 90 days"
-        descriptionStyle={{ color: "#4a4a4a", fontWeight: 400 }}
+        descriptionStyle={{ color: "#d1d5db", fontWeight: 400 }}
         buttonText="Book a Session"
         onButtonClick={openCalendly}
         colors={[
