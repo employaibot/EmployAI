@@ -24,6 +24,8 @@ interface HeroSectionProps {
   fontWeight?: number;
   brandName?: string;
   brandNameClassName?: string;
+  highlightStyle?: React.CSSProperties;
+  descriptionStyle?: React.CSSProperties;
 }
 
 export function HeroSection({
@@ -47,6 +49,8 @@ export function HeroSection({
   fontWeight = 500,
   brandName,
   brandNameClassName = "",
+  highlightStyle,
+  descriptionStyle,
 }: HeroSectionProps) {
   const [dimensions, setDimensions] = useState({ width: 1920, height: 1080 });
   const [mounted, setMounted] = useState(false);
@@ -102,10 +106,11 @@ export function HeroSection({
             className={`font-bold text-foreground text-balance text-[20px] sm:text-[27px] md:text-[34px] lg:text-[40px] xl:text-[45px] leading-tight sm:leading-tight md:leading-tight lg:leading-tight xl:leading-[1.1] mb-6 ${titleClassName}`}
             style={{ fontFamily, fontWeight }}
           >
-            {title} <span className="text-primary">{highlightText}</span>
+            {title} <span className="text-primary" style={highlightStyle}>{highlightText}</span>
           </h1>
           <p
-            className={`text-lg sm:text-xl text-white text-pretty max-w-2xl mx-auto leading-relaxed mb-10 px-4 ${descriptionClassName}`}
+            className={`text-lg sm:text-xl text-pretty max-w-2xl mx-auto leading-relaxed mb-10 px-4 ${descriptionClassName}`}
+            style={descriptionStyle}
           >
             {description}
           </p>

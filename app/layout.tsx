@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Lato, Plus_Jakarta_Sans } from "next/font/google";
+import { Lato, Plus_Jakarta_Sans, Sora } from "next/font/google";
 import { GoogleAnalytics } from "@next/third-parties/google";
 import { Navbar } from "@/components/Navbar";
 import { CalendlyProvider } from "@/lib/context/calendly-context";
@@ -9,6 +9,13 @@ const lato = Lato({
   subsets: ["latin"],
   weight: ["300", "400", "700", "900"],
   variable: "--font-lato",
+  display: "swap",
+});
+
+const sora = Sora({
+  subsets: ["latin"],
+  weight: ["400", "600", "800"],
+  variable: "--font-sora",
   display: "swap",
 });
 
@@ -47,7 +54,7 @@ export default function RootLayout({
     <html
       lang="en"
       suppressHydrationWarning
-      className={`${lato.variable} ${plusJakartaSans.variable}`}
+      className={`${lato.variable} ${plusJakartaSans.variable} ${sora.variable}`}
     >
       <head>
         <meta charSet="utf-8" />

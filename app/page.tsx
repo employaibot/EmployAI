@@ -10,10 +10,18 @@ export default function HomePage() {
     <main className="h-screen overflow-hidden">
       <HeroSection
         brandName="The Blue Dot Agency"
-        brandNameClassName="text-white/90"
+        brandNameClassName="text-[#0a0a0a]"
+        titleClassName="text-[#0a0a0a]"
         title="30-minute strategy for your business."
         highlightText=""
+        highlightStyle={{
+          background: "linear-gradient(90deg, #7B5CF5, #38BDF8)",
+          WebkitBackgroundClip: "text",
+          WebkitTextFillColor: "transparent",
+          backgroundClip: "text",
+        }}
         description="Built around your budget and your next 90 days"
+        descriptionStyle={{ color: "#4a4a4a", fontWeight: 400 }}
         buttonText="Book a Session"
         onButtonClick={openCalendly}
         colors={[
@@ -27,7 +35,8 @@ export default function HomePage() {
         distortion={1.2}
         speed={0.8}
         veilOpacity="bg-black/30"
-        fontFamily="var(--font-plus-jakarta), 'Plus Jakarta Sans', sans-serif"
+        fontFamily="var(--font-sora), 'Sora', sans-serif"
+        fontWeight={800}
       />
     </main>
   );
