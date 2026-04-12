@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Lato, Plus_Jakarta_Sans } from "next/font/google";
 import { GoogleAnalytics } from "@next/third-parties/google";
 import { Navbar } from "@/components/Navbar";
+import { CalendlyProvider } from "@/lib/context/calendly-context";
 import "@/app/globals.css";
 
 const lato = Lato({
@@ -57,8 +58,10 @@ export default function RootLayout({
         <link rel="dns-prefetch" href="https://assets.calendly.com" />
       </head>
       <body className="h-screen overflow-hidden bg-white pt-16 text-gray-900">
-        <Navbar />
-        {children}
+        <CalendlyProvider>
+          <Navbar />
+          {children}
+        </CalendlyProvider>
         {process.env.NEXT_PUBLIC_GA_ID && (
           <GoogleAnalytics gaId={process.env.NEXT_PUBLIC_GA_ID} />
         )}

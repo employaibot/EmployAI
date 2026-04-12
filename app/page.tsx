@@ -1,11 +1,10 @@
 "use client";
 
-import { useState } from "react";
+import { useCalendly } from "@/lib/context/calendly-context";
 import { HeroSection } from "@/components/ui/hero-section-with-smooth-bg-shader";
-import { CalendlyModal } from "@/components/CalendlyModal";
 
 export default function HomePage() {
-  const [isOpen, setIsOpen] = useState(false);
+  const { openCalendly } = useCalendly();
 
   return (
     <main className="h-screen overflow-hidden">
@@ -16,7 +15,7 @@ export default function HomePage() {
         highlightText=""
         description="Built around your budget and your next 90 days"
         buttonText="Book a Session"
-        onButtonClick={() => setIsOpen(true)}
+        onButtonClick={openCalendly}
         colors={[
           "#2D8CFF",
           "#0E72EB",
@@ -29,11 +28,6 @@ export default function HomePage() {
         speed={0.8}
         veilOpacity="bg-black/30"
         fontFamily="var(--font-plus-jakarta), 'Plus Jakarta Sans', sans-serif"
-      />
-      <CalendlyModal
-        isOpen={isOpen}
-        onClose={() => setIsOpen(false)}
-        url={process.env.NEXT_PUBLIC_CALENDLY_URL ?? ""}
       />
     </main>
   );
