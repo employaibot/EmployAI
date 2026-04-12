@@ -1,4 +1,5 @@
 import Link from "next/link";
+import GradientPillButton from "@/components/ui/GradientPillButton";
 
 export function Navbar() {
   return (
@@ -14,12 +15,9 @@ export function Navbar() {
           The Blue Dot Agency
         </Link>
 
-        <Link
-          href="/contact"
-          className="rounded-[10px] bg-brand px-5 py-2.5 text-sm font-bold text-white transition-colors hover:bg-brand-dark"
-        >
+        <GradientPillButton href="/contact">
           Got a Question? — Email Us
-        </Link>
+        </GradientPillButton>
       </nav>
     </header>
   );
