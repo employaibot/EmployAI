@@ -105,7 +105,7 @@ export function HeroSection({
             {title} <span className="text-primary">{highlightText}</span>
           </h1>
           <p
-            className={`text-[13px] sm:text-[14px] text-white text-pretty max-w-2xl mx-auto leading-relaxed mb-10 px-4 ${descriptionClassName}`}
+            className={`text-lg sm:text-xl text-white text-pretty max-w-2xl mx-auto leading-relaxed mb-10 px-4 ${descriptionClassName}`}
           >
             {description}
           </p>
